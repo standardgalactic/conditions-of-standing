@@ -1,0 +1,16 @@
+Candidate operation: ('squash', 'feature', 'base') (same evidence in every row: final tree unchanged)
+
+published commits (K)     stateless   state-indexed
+{}                        True        True
+{'base'}                  True        True
+{'c1'}                    True        False
+{'c2'}                    True        False
+{'c3'}                    True        False
+
+A trace: assess the rewrite, publish c2 (a commitment transition), assess again.
+  before publication: True
+  after publication:  False
+
+Result: the stateless assessment returns the same verdict in every row, so it
+is wrong for at least one of s0 and s1. Standing attaches to the transition in
+a state, and a commitment transition changes what later transitions require.

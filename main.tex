@@ -1,0 +1,105 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1.2in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{setspace}
+\usepackage[hidelinks]{hyperref}
+\setstretch{1.08}
+\setlength{\parindent}{1.4em}
+\setlength{\parskip}{0pt}
+
+\newcommand{\Std}{\operatorname{Std}}
+\newcommand{\Rec}{\operatorname{Rec}}
+\newcommand{\Wt}{\operatorname{W}}
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\title{The Conditions of Standing\\[0.4em]
+\large Generation, Inscription, Evaluation, Authorization,\\and Commitment as Distinct Transitions}
+\author{Flyxion\\Independent Researcher}
+\date{October 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+Five operations are routinely run together in discussions of what a system may rely on: generating a candidate, inscribing it in a shared record, evaluating it, authorizing its use, and committing to it. This document treats them as distinct transitions between system states and defines a relation of standing that says when a proposed transition is entitled to count for a stated consequence, in a stated scope, on stated evidence, under a stated evaluation procedure, given the commitments already in force at a stated time. Five propositions are proved or exhibited by countermodel: occurrence, licensing and warrant are independent; standing is not in general preserved under higher consequence, wider scope or accumulating commitments; the use of a procedure does not confer standing on it; reversibility is neither recoverability nor correctness; and inscription counts underdetermine warranted content. Five cases from different fields apply one analytical procedure, and four short programs make selected claims independently checkable. The aim is consolidation of an existing body of work, not a general theory, and the limits of the framework are stated in the final section.
+\end{abstract}
+
+\section*{Scope and Borrowing}
+
+The word standing is borrowed from law for its structure and for nothing else. In legal practice, standing is not a verdict on whether a party is right. It is a determination of whether a claim is entitled to be heard for a given purpose, by a given body, with given consequences, and the doctrine that governs it varies by jurisdiction and has been described in terms of injury, causation and redressability in United States federal courts \cite{lujan}. None of that doctrine is adopted here, and no position is taken on how any court ought to decide any question. What is retained is the shape of the idea: entitlement to count is always entitlement relative to a forum, a purpose and a consequence, and it is distinct from both truth and procedural acceptance.
+
+The same shape recurs where no court is involved. A conjecture produced by a model, a document filed in a registry, a result accepted by a proof checker, a drug approved for a use, and a release that other software depends on are all candidates that have been moved some distance toward counting, and in each case it is possible to ask how far they have moved and who may answer for the distance. Epistemic, computational and institutional senses of standing are defined in parallel below, with separate worked cases, and an argument is permitted to pass from one sense to another only through an explicitly stated bridge. Mathematical proof, empirical evidence, institutional authority and operational safety are not reduced to one another, and much of the value of the framework lies in keeping them apart while using one vocabulary.
+
+The document does not announce a new theory and does not derive other frameworks from a single theorem. It fixes a vocabulary, states five structural results with their assumptions, applies them to five cases, and says where they stop. Commitment and reversibility have a fuller treatment elsewhere in the same body of work \cite{admiss}, which is cited where it bears on a proposition and is not restated. Four programs in the \texttt{examples} directory reproduce selected claims in executable form, and a separate map relates the remaining essays in the corpus to the results given here.
+
+\input{sec1}
+\input{sec2}
+\input{sec3}
+\input{sec4}
+\input{sec5}
+
+
+\begin{thebibliography}{9}
+
+\bibitem{lujan}
+\emph{Lujan v. Defenders of Wildlife},
+504 U.S. 555 (1992).
+
+\bibitem{bartlett}
+F. C. Bartlett,
+\emph{Remembering: A Study in Experimental and Social Psychology},
+Cambridge University Press, 1932.
+
+\bibitem{loftus}
+E. F. Loftus and J. C. Palmer,
+``Reconstruction of automobile destruction:
+An example of the interaction between language and memory,''
+\emph{Journal of Verbal Learning and Verbal Behavior},
+vol. 13, no. 5 (1974), pp. 585--589.
+
+\bibitem{gitrebase}
+Git Project,
+\emph{git-rebase: Git Documentation},
+sections on recovering from an upstream rebase
+and rewriting published history.
+\url{https://git-scm.com/docs/git-rebase}.
+
+\bibitem{admiss}
+Flyxion,
+\emph{The Cost of Future Admissibility},
+2026.
+\url{https://standardgalactic.github.io/admissibility-lab/cost_of_future_admissibility.pdf}.
+
+\bibitem{contrast}
+Flyxion,
+\emph{Contrast as Control},
+2026.
+\url{https://standardgalactic.github.io/diatribe/contrast-as-control.pdf}.
+
+\bibitem{corrective}
+Flyxion,
+\emph{Semantic Geometry and Corrective Navigation},
+2026.
+\url{https://standardgalactic.github.io/memnet/corrective-navigation/semantic-geometry-spec.pdf}.
+
+\bibitem{authz}
+Flyxion,
+\emph{Authorization and Its Remainder},
+2026.
+\url{https://standardgalactic.github.io/sandbox/authorization_and_its_remainder.pdf}.
+
+\bibitem{echo}
+Flyxion,
+\emph{Echo Chamber},
+2026.
+\url{https://standardgalactic.github.io/echo-chamber/echo-chamber.pdf}.
+
+\end{thebibliography}
+
+\end{document}

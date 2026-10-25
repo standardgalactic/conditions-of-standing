@@ -1,0 +1,12 @@
+*.json
+*.srt
+*.tsv
+
+*.aux
+*.log
+*.fls
+*.fdb_latexmk
+*.out
+*.toc
+*.synctex.gz
+__pycache__/

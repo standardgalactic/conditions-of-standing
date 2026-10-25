@@ -1,0 +1,75 @@
+\section{Propositions}
+
+The five results below are structural. Each is stated with its assumptions, each negative result is supported by an explicit countermodel, and none is offered as a claim about the world beyond the models in which it is proved. Where a result has been checked by exhaustive search over small systems, the corresponding program in the \texttt{examples} directory is named. The strength of the results is meant to come from the explicitness of their assumptions and not from the generality of their conclusions, and a reader who finds an assumption unreasonable for a given domain is invited to see that as the beginning of an analysis of that domain and not as a defect in the result.
+
+\subsection*{Independence of occurrence, licensing and warrant}
+
+\begin{proposition}\label{prop:one}
+Let a rule system and a standing relation be given for a system. Then (a) a transition can occur without being licensed; (b) a transition can be licensed and not occur; (c) a transition can be licensed without having standing; and (d) a transition can have standing without being licensed. Moreover, in any rule system that requires evaluation as a prerequisite of commitment, every licensed history in which a commitment occurs contains an evaluation before it.
+\end{proposition}
+
+\begin{proof}
+Claims (a) and (b) follow from the fact that occurrence is a property of the history and licensing a property of the rules: a history can contain an operation the rules do not permit in its state, and the rules can permit operations that the history never contains. For (c), take a rule system in which commitment has no prerequisites and a candidate that $P$ rejects on the available evidence; the commitment is licensed and, by the definition of standing, lacks it. For (d), take a rule system that requires two independent approvals before commitment and a candidate that $P$ accepts on $V$ after one approval; the commitment has standing and is not licensed. The final claim is conditional on the rules and follows from the definition of licensing: if evaluation is a prerequisite of commitment, a history that commits before evaluating contains a transition that is not licensed. An exhaustive search over the $1024$ rule systems in which each of five operations may require any subset of the earlier operations, and over all $3906$ histories of length at most five, confirms each part; it finds that in the rule systems requiring evaluation before commitment no licensed history commits without evaluating, while in the rule systems that do not require it there are $72{,}012$ licensed histories that commit without evaluating (\texttt{ex4\_countermodels.py}).
+\end{proof}
+
+The proposition concerns the independence of occurrence and warrant and does not assert an unrestricted independence between every adjacent pair of transition types. That an unauthorized commitment can occur without prior evaluation does not show that commitment is licensed without evaluation, and the final claim of the proposition is there to block that inference. Where a system's own rules require evaluation before commitment, the only ways a commitment can occur without evaluation are that the rules were broken or that the rules were defective in what they required, and these are different failures with different remedies.
+
+\subsection*{Non-preservation of standing}
+
+The second result requires an explicit assumption about how standing is assessed, because without one nothing can be said about how it changes. The assumption is deliberately minimal.
+
+\medskip
+\noindent\textbf{Assumption A.} The procedure $P$ is fixed and deterministic. A candidate is a function $h$ from a finite set of contexts to outcomes. The evidence $V$ records outcomes observed at some contexts. A consequence class carries a confirmation requirement $c$, and higher consequence classes carry higher requirements. $P$ accepts $h$ for $(C,S)$ on $V$ if and only if $h$ agrees with every observation in $V$ that lies in $S$ and at least $c$ contexts in $S$ are observed.
+\medskip
+
+\begin{proposition}\label{prop:two}
+Standing is not in general preserved (a) when the consequence class is raised, (b) when the scope is widened, or (c) when commitments accumulate. Parts (a) and (b) hold under Assumption A, and part (c) holds in a model whose procedure rejects any transition that removes an item on which a commitment depends. Failure of preservation is not the same as monotone loss: widening the scope can also produce standing that was absent.
+\end{proposition}
+
+\begin{proof}
+For (a), let there be two contexts, let $V$ record outcome $0$ at the first context, let $h$ be constantly $0$, let $S$ contain both contexts, and let $c=1$ for the lower class and $c=2$ for the higher. Then $h$ agrees with all observations and one context is observed, so $h$ has standing at $c=1$ and lacks it at $c=2$. For (b), let $V$ record outcome $0$ at two contexts, let $h$ take the value $0$ at the first and $1$ at the second, let $S$ contain only the first and $S'$ contain both, and let $c=1$. Then $h$ has standing in $S$ and lacks it in $S'$, because it disagrees with an observation that entered the scope. The gain is shown by the same evidence with $h$ constantly $0$ and $c=2$: in $S$ only one context is observed and in $S'$ two are, so standing is absent in $S$ and present in $S'$. For (c), take the state-indexed model of the branching case below, in which the operation is a rewrite of history, the evidence is that the final tree is unchanged, and $P$ rejects any rewrite that removes a published commit. In a state with no published commits the rewrite is accepted, and in the state obtained by publishing one of the commits it is rejected, with $C$, $S$, $V$ and $P$ unchanged (\texttt{ex2\_branching.py}). An exhaustive search over four contexts finds the minimal cases for (a) and (b) and finds that raising consequence never produces standing in this model while widening scope sometimes does (\texttt{ex4\_countermodels.py}).
+\end{proof}
+
+The proposition does not say that increasing consequence, widening scope or accumulating commitments logically forces standing to disappear. It says that none of these changes can be assumed harmless, and that any claim of standing made at one setting must be remade at another. The commitments case is the most instructive of the three, because it shows why standing attaches to a proposed transition in a particular state and not to an isolated candidate. In the branching example the candidate operation is identical in both assessments and so is the evidence that it preserves the tree, and a stateless assessment, which looks only at the operation and the evidence, returns the same verdict in every state and is therefore mistaken in at least one. What differs is the set of commitments, and with it what the transition would newly make irreversible. This is the result that most clearly requires transitions as the primitive.
+
+\subsection*{Use does not confer standing on a procedure}
+
+\begin{proposition}\label{prop:three}
+Let $P$ be an evaluation procedure and let $I$ be a finite set of instances on which $P$ has been applied. Let $J$ be a criterion that is independent of $P$, such as ground truth or a later outcome. Then there is a procedure $P'$ whose acceptances on $I$ coincide with those of $P$ and which disagrees with $P$ outside $I$. Consequently the record of $P$'s acceptances cannot by itself establish that $P$ rather than $P'$ is the appropriate procedure for any consequence that reaches beyond $I$.
+\end{proposition}
+
+\begin{proof}
+Define $P'$ to equal $P$ on $I$ and to accept every candidate outside $I$. The acceptance records of $P$ and $P'$ over $I$ are identical, so no feature of that record distinguishes them. If $J$ agrees with $P$ on $I$ and disagrees with $P$ somewhere outside $I$, then $P$ and $P'$ cannot both agree with $J$ there, and the record cannot say which does. An instance of the same form arises when $P$ accepts everything it is shown and every candidate shown so far happened to be true: the record is then indistinguishable from that of a procedure that accepts exactly the true candidates.
+\end{proof}
+
+The proposition is stated at this level and no further. It says that the fact that a procedure is used to evaluate candidates does not establish the procedure's own standing, and that standing for the procedure has to come from evidence about how it performs against something other than its own outputs, or from an explicit convention or stipulation that the system adopts knowingly. The question of whether this leads to an infinite regress of evaluators is separate and is treated as a limitation in the final section. A procedure can be assessed by another procedure, and formal systems can work relative to stipulated rules, and institutions can confer authority on procedures by conventions that remain contestable, without any claim that every evaluation requires an unending chain.
+
+\subsection*{Reversibility, recoverability and correctness}
+
+Reversibility is used in two senses that should be separated. A transition $(s,o,s')$ is \emph{reversible in the record} when some later operation takes $s'$ to a state whose record is the same set of inscriptions as that of $s$. It is \emph{recoverable} when, in addition, everything that depended on the transition during the interval has also been returned to what it was in $s$: the copies taken, the actions based on the item, and the consequences realized.
+
+\begin{proposition}\label{prop:four}
+(a) A transition can be reversible in the record and not recoverable. (b) The reversibility of a transition does not establish that it has standing for the consequences it has while in force. (c) Reversibility can legitimately lower the evaluation that a procedure requires of a transition, but it does not discharge the requirement for the interval in which others rely on the result.
+\end{proposition}
+
+\begin{proof}
+For (a), let a state consist of a record $R$ and a set $D$ of dependents' copies, let publication add an item $x$ to $R$, let each dependent copy $x$ into $D$ when it is in $R$, and let retraction remove $x$ from $R$ without touching $D$. Publication followed by retraction returns $R$ to its earlier value and leaves $D$ changed, so the transition is reversible in the record and not recoverable. For (b), suppose $x$ is false and that $P$ would reject its publication for a consequence class that includes reliance by dependents. Publication is reversible and, during the interval before retraction, dependents rely on it, so the transition lacks standing for that class while the ability to retract remains. For (c), the ability to retract changes what a rejection would cost and what a mistaken acceptance would cost, and a procedure may reasonably require less of a transition that can be undone cheaply. The requirement is lowered and not removed, because the interval of reliance is itself a consequence.
+\end{proof}
+
+The distinction connects to the treatment of commitment and the preservation of future options given elsewhere in the corpus \cite{admiss} and is not developed further here. Ordinary cases show its force. A published claim can be retracted without erasing its influence on work done in the interval. A change to software can be reverted without reversing every action taken while it was active. A history rewritten in a repository can be restored locally from stored objects while collaborators' copies have diverged, which is the reason the documentation of the standard version control tools advises against rewriting history that others have based work on \cite{gitrebase}. In each case the formal state space supports reversal and the world has not been returned to where it was.
+
+\subsection*{Inscription counts underdetermine warranted content}
+
+If warranted items are a subset of recorded items, then the number of recorded items can grow without bound while the number of warranted items stays fixed, whenever unwarranted inscriptions are permitted. That observation is immediate and is not the result. The substantive claim is informational.
+
+\begin{proposition}\label{prop:five}
+Let a record be a finite set of inscriptions, each an observation or a derived item citing other inscriptions, and let standing be assigned by grounded closure: observations have standing, and a derived item has standing if and only if it cites at least one item and every item it cites has standing. There are records with the same number of inscriptions, the same number of observations and the same number of citation links whose sets of items with standing differ in size. Hence no function of these counts determines the warranted content of a record.
+\end{proposition}
+
+\begin{proof}
+Let the first record contain observations $1$ and $2$ and derived items $3$ citing $1$, $4$ citing $1$ and $2$, $5$ citing $3$, and $6$ citing $4$ and $5$. All six items have standing. Let the second record contain observations $1$ and $2$ and derived items $3$ citing $4$, $4$ citing $3$ and $1$, $5$ citing $6$, and $6$ citing $5$ and $2$. Each record has six inscriptions, two observations and six citation links. In the second record the derived items cite one another in cycles, none of them is grounded, and only items $1$ and $2$ have standing. An exhaustive search over all $4096$ records of four inscriptions finds $25$ classes of records agreeing in these three counts, and finds that in $9$ of the classes the members differ in how many items have standing (\texttt{ex1\_ledgers.py}).
+\end{proof}
+
+The result identifies what a count-based view of a record cannot see. Two records can look identical to any summary that counts inscriptions, observations and links and differ completely in what they warrant, because what matters is the dependency structure and its grounding, which counts discard. The practical form of the point is that a growing record is not evidence of a growing body of established claims, and that measures of volume, activity or citation are silent about warrant unless they encode the structure that warrant depends on.
+
+A sixth relationship lies outside the scope of this document. When generating candidates becomes cheap and evaluating them does not, the cost of the gap falls on whoever maintains the shared record, and the resulting asymmetry has an economic form that deserves a separate treatment under its own name. That argument presupposes the definitions given here, since it needs standing to be defined before its cost can be discussed, and it is deferred.

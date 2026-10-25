@@ -1,0 +1,15 @@
+Part A: 1024 rule systems, 3906 traces each
+  commit occurs in an unlicensed trace:                      2483524 cases
+  commit licensed at the end of a trace and never occurs:    159184 cases
+  rules requiring evaluation: licensed commits without prior evaluation:    0
+  rules not requiring evaluation: licensed commits without prior evaluation: 72012
+  Occurrence does not entail licensing. Where the rules require evaluation, no
+  licensed trace commits without it. Where they do not, the rules are defective.
+
+Part B: standing is not generally preserved (one fixed procedure, fixed evidence)
+  consequence 1 -> 2: 12800 losses; smallest: V=(0, None, None, None), h=(0, 0, 0, 0), scope=(0, 1)
+  scope widening: 10816 losses; smallest: V=(0, 0, None, None), h=(0, 1, 0, 0), scope (0,) -> (0, 1), level 1
+  raising consequence never gains standing here: 0 gains
+  widening scope can gain standing here (more contexts observed): 13728 gains
+  Standing is not monotone in consequence or scope, and the scope direction runs
+  both ways. The commitments dimension is the state-indexed model in Example 2.

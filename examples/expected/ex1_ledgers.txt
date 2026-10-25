@@ -1,0 +1,11 @@
+Ledger A: signature (6, 2, 6) standing [1, 2, 3, 4, 5, 6]
+Ledger B: signature (6, 2, 6) standing [1, 2]
+
+All 4096 ledgers with 4 inscriptions (inscription count is 4 for every one):
+  standing sizes seen across all of them: [0, 1, 2, 4]
+  signature classes (size, observations, links): 25
+  classes whose members differ in how many items have standing: 9
+  example class (4, 1, 6) has standing sizes [1, 2, 4]
+
+Result: no function of inscription count, observation count, or link count
+determines the warranted content of the record.

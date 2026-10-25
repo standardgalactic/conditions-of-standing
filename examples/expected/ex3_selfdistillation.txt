@@ -1,0 +1,13 @@
+K=30 correct, M=10 wrong, N=100 samples/generation, 40 generations, 20 seeds
+start: coverage 1.000, wrong mass 0.080, TV 0.080
+condition          coverage  wrong mass  TV to truth
+train_only            0.127       0.111        0.724
+confidence_sel        0.040       0.000        0.765
+posthoc_eval          0.127       0.111        0.724
+verifier_loop         0.140       0.000        0.698
+verifier_anchor       0.553       0.000        0.371
+
+posthoc_eval trajectory identical to train_only on every seed: True
+Checks passed: coverage falls without fresh data, the verifier removes wrong
+mass but leaves coverage falling, and anchoring with fresh verified samples helps.
+These hold under the stated conditions only; none of this is claimed in general.
